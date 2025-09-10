@@ -7,11 +7,19 @@ import os
 
 
 def download_model():
-    url = "https://drive.google.com/file/d/1ULJOtjtm6eGZj81_NWRVaIJcaIkuABJH/view?usp=drive_link"  
+    url = "https://drive.google.com/uc?id=YOUR_FILE_ID"
     output = "model_11.h5"
     if not os.path.exists(output):
         gdown.download(url, output, quiet=False)
+
+    # Debug
+    if not os.path.exists(output):
+        st.error("Model file was NOT downloaded!")
+    else:
+        st.success(f"Model downloaded: {os.path.getsize(output)/1024/1024:.2f} MB")
+
     return output
+
 
 # Load the trained model
 @st.cache_resource
@@ -49,3 +57,4 @@ if uploaded_file is not None:
 
     st.success(f"Predicted Gender: **{gender_label}**")
     st.info(f"Predicted Age: **{predicted_age} years**")
+
