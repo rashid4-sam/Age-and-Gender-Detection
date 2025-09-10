@@ -7,7 +7,7 @@ import os
 
 
 def download_model():
-    url = "https://drive.google.com/uc?id=YOUR_FILE_ID"
+    url = "https://drive.google.com/file/d/1ULJOtjtm6eGZj81_NWRVaIJcaIkuABJH/view?usp=drive_link"
     output = "model_11.h5"
     if not os.path.exists(output):
         gdown.download(url, output, quiet=False)
@@ -57,4 +57,5 @@ if uploaded_file is not None:
 
     st.success(f"Predicted Gender: **{gender_label}**")
     st.info(f"Predicted Age: **{predicted_age} years**")
+
 
