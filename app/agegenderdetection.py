@@ -6,19 +6,17 @@ import gdown
 import os
 
 
+import requests
+
 def download_model():
-    url = "https://drive.google.com/file/d/1ULJOtjtm6eGZj81_NWRVaIJcaIkuABJH/view?usp=drive_link"
+    url = "https://www.dropbox.com/scl/fi/1jhjbbxrhyp1kk2lmkh00/model_11.h5?rlkey=ub1c1rehfljsonl9fmhqwtxx5&st=ninkel24&dl=1"
     output = "model_11.h5"
     if not os.path.exists(output):
-        gdown.download(url, output, quiet=False)
-
-    # Debug
-    if not os.path.exists(output):
-        st.error("Model file was NOT downloaded!")
-    else:
-        st.success(f"Model downloaded: {os.path.getsize(output)/1024/1024:.2f} MB")
-
+        r = requests.get(url, allow_redirects=True)
+        with open(output, "wb") as f:
+            f.write(r.content)
     return output
+
 
 
 # Load the trained model
@@ -57,5 +55,6 @@ if uploaded_file is not None:
 
     st.success(f"Predicted Gender: **{gender_label}**")
     st.info(f"Predicted Age: **{predicted_age} years**")
+
 
 
