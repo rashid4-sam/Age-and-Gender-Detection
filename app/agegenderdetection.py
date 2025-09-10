@@ -3,6 +3,7 @@ import tensorflow as tf
 import numpy as np
 from PIL import Image
 import os
+from huggingface_hub import hf_hub_download
 
 
 
@@ -48,6 +49,7 @@ if uploaded_file is not None:
 
     st.success(f"Predicted Gender: **{gender_label}**")
     st.info(f"Predicted Age: **{predicted_age} years**")
+
 
 
 
