@@ -6,4 +6,7 @@ scikit-learn
 Pillow
 matplotlib
 xgboost
-gdown
+huggingface_hub
+tensorflow
+numpy
+Pillow
