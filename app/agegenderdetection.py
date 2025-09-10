@@ -2,27 +2,20 @@ import streamlit as st
 import tensorflow as tf
 import numpy as np
 from PIL import Image
-import gdown
 import os
 
 
-import requests
 
-def download_model():
-    url = "https://www.dropbox.com/scl/fi/1jhjbbxrhyp1kk2lmkh00/model_11.h5?rlkey=ub1c1rehfljsonl9fmhqwtxx5&st=ninkel24&dl=1"
-    output = "model_11.h5"
-    if not os.path.exists(output):
-        r = requests.get(url, allow_redirects=True)
-        with open(output, "wb") as f:
-            f.write(r.content)
-    return output
 
 
 
 # Load the trained model
 @st.cache_resource
 def load_model():
-    model_path = download_model()
+    model_path = hf_hub_download(
+        repo_id="rashidsamad/age-gender-detection",  
+        filename="model_11.h5"
+    )
     return tf.keras.models.load_model(model_path, compile=False)
 
 model = load_model()
@@ -55,6 +48,7 @@ if uploaded_file is not None:
 
     st.success(f"Predicted Gender: **{gender_label}**")
     st.info(f"Predicted Age: **{predicted_age} years**")
+
 
 
 
